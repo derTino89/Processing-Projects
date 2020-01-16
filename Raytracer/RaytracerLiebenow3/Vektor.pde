@@ -1,0 +1,82 @@
+class Vektor {
+  float _x;
+  float _y;
+  float _z;
+
+  //Konstruktoren:
+
+  Vektor(float x, float y, float  z) {
+    _x=x;
+    _y=y;
+    _z=z;
+  }
+
+  Vektor(Vektor another) {
+    _x=another._x;
+    _y=another._y;
+    _z=another._z;
+  }
+
+  // Berechnungen:
+
+  Vektor plusV(Vektor summand) {
+    return new Vektor(_x+summand._x, _y+summand._y, _z+summand._z);
+  }
+  Vektor minusV(Vektor summand) {
+    return new Vektor(_x-summand._x, _y-summand._y, _z-summand._z);
+  }
+  Vektor multi(float n) {
+    return new Vektor(_x*n, _y*n, _z*n);
+  }
+  Vektor divide(float n){
+    return new Vektor(this._x/n,this._y/n,this._z/n);
+  }
+  Vektor normV() {
+    return new Vektor(this._x/this.lenght(), this._y/this.lenght(), this._z/this.lenght());
+  }
+
+  float dist(Vektor v) {
+    float Xnew=_sqr(_x-v._x);
+    float Ynew=_sqr(_y-v._y);
+    float Znew=_sqr(_z-v._z);
+    return sqrt(Xnew+Ynew+Znew);
+  }
+
+  float skalar(Vektor v) {
+    float Xnew=_x*v._x;
+    float Ynew=_y*v._y;
+    float Znew=_z*v._z;
+    return Xnew+Ynew+Znew;
+  }
+  Vektor kreuz(Vektor b){
+    float x = (_y*b._z)-(b._y*_z);
+    float y = (_z*b._x)-(b._z*_x);
+    float z = (_x*b._y)-(b._x*_y);
+    return new Vektor(x,y,z);
+  }
+  Vektor umdreh() {
+    return new Vektor(-_x, -_y, -_z);
+  }
+  
+  float lengthSquared()
+  {
+    return this.skalar(this); //  ECHT? Grosse Augen!
+  }
+
+  float lenght() {
+    return(sqrt(lengthSquared())); // geändert jb20190517
+  }
+
+  float _sqr(float n) {
+    return n*n;
+  }
+  Vektor clone() {
+    return new Vektor(_x, _y, _z);
+  }
+  void setX(float x){
+    _x=x;
+  }
+  void setY(float y){
+    _y=y;
+  }
+}
